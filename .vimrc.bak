@@ -1,0 +1,143 @@
+
+
+set nocompatible
+"让vim识别不同的文件格式
+filetype on
+filetype indent on
+filetype plugin on
+filetype plugin indent on
+"
+
+let mapleader=","						"设置<LEACER>
+
+let &t_ut=''
+
+"设置vim的字体与大小
+"set guifont=Monospace\ 16(Monospace为字体，\和16之间有个空格)
+syntax on								"语法高亮
+set number								"显示行号
+set relativenumber						"行号按照与光标所在行的差值显示
+set wrap								"显示文本不会超过当前屏幕
+set showcmd								"显示正在输入的命令
+set wildmenu							"开启命令的自动补全
+set encoding=utf-8						"设置编码格式
+"mouse=a								"开启鼠标
+set tabstop=4							"设置tab输入空格数量
+set softtabstop=4						"统一缩进为上面的数值
+"set expandtab							"把tab字符换成相应数值的空格
+set autoindent							"换行时与上一行对齐
+"set cmdheight=1						"设置命令行的高度
+set scrolloff=5							"保证光标距离最上和最下的距离
+"打开文件时光标自动放在上次退出时的位置
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+
+"搜索
+"
+set hlsearch							"搜索结果高亮
+"set cursorline							"光标所在行高亮
+"set cursorcolumn						"光标所在列高亮
+set nowrapscan							" 禁止在搜索到文件两端时重新搜索
+set incsearch							"每个字符的输入都会更新搜索结果
+set ignorecase							"搜索忽视大小写
+set smartcase							"搜索开启智能大小写
+
+"取消因搜索带来的文本高亮
+noremap <LEADER><CR> :nohlsearch<CR>
+
+"把s键设置为空
+map s <nop>
+"保存
+map S :w<CR>
+"退出
+map Q :q<CR>
+"重新加载配置文件
+map R :source $MYVIMRC<CR>
+
+"向右分屏
+map sr :set splitright<CR>:vsplit<CR>			
+"向左分屏
+map sl :set nosplitright<CR>:vsplit<CR>			
+"向上分屏
+map su :set nosplitbelow<CR>:split<CR>			
+"向下分屏
+map se :set splitbelow<CR>:split<CR>			
+
+"移动到右边的分屏
+map <LEADER>l <C-w>l					
+"移动到上边的分屏
+map <LEADER>k <C-w>k					
+"移动到左边的分屏
+map <LEADER>h <C-w>h					
+"移动到下边的分屏
+map <LEADER>j <C-w>j					
+
+"上下分屏改为左右分屏
+map sv <C-w>t<C-w>H
+"左右分屏改为上下分屏
+map sh <C-w>t<C-w>K
+
+"当前分屏上下长度增加
+map <up> :res +5<CR>					
+"当前分屏上下长度减少
+map <down> :res -5<CR>					
+"当前分屏左右长度减少
+map <left> :vertical resize-5<CR>			
+"当前分屏左右长度增加
+map <right> :vertical resize+5<CR>			
+
+"新建标签页
+map tu :tabe<CR>
+"向左移动标签页
+map tl :-tabnext<CR>	
+"向右移动标签页
+map tr :+tabnext<CR>					
+
+"退出单词纠错
+map <LEADER>sc :set spell!<CR>
+
+
+call plug#begin('~/.vim/plugged')
+
+"airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+"nerdtree
+Plug 'preservim/nerdtree'
+
+"ale
+"Plug 'dense-analysis/ale'
+
+"goyo
+Plug 'junegunn/goyo.vim'
+
+call plug#end()
+
+"=aieline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='simple'
+
+"=NERDTree
+map <LEADER>n :NERDTreeToggle<CR>
+let g:NERDTreeWinSize = 20
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '\.vscode', '__pycache__']  " 过滤隐藏文件
+"let g:NERDTreeShowLineNumbers=1  " 是否显示行号
+let g:NERDTreeHidden=0     "不显示隐藏文件
+let NERDTreeOpenSplit = ""
+let NERDTreeMapOpenSplit = ""
+let NERDTreeMapOpenExpl = ""
+let NERDTreeMapUpdir = ""
+let NERDTreeMapUpdirKeepOpen = "u"
+let NERDTreeMapCloseDir = "c"
+let NERDTreeMapPreview = ""
+let NERDTreeMapChangeRoot = "y"
+
+"=goyo
+map <LEADER>gy :Goyo<CR>
+
+
+
+
+
