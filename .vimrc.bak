@@ -1,14 +1,14 @@
 
 
 set nocompatible
-"让vim识别不同的文件格式
+"让vim识别不同的文件格式(向下兼容vi)
 filetype on
 filetype indent on
 filetype plugin on
 filetype plugin indent on
 "
 
-let mapleader=","						"设置<LEACER>
+let mapleader=" "						"设置<LEACER>
 
 let &t_ut=''
 
@@ -112,11 +112,16 @@ Plug 'preservim/nerdtree'
 "goyo
 Plug 'junegunn/goyo.vim'
 
+"gruvbox-material
+Plug 'sainnhe/gruvbox-material'
+
+
 call plug#end()
 
 "=aieline
+set ambiwidth=double
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='simple'
+"let g:airline_theme='simple'
 
 "=NERDTree
 map <LEADER>n :NERDTreeToggle<CR>
@@ -138,6 +143,19 @@ let NERDTreeMapChangeRoot = "y"
 map <LEADER>gy :Goyo<CR>
 
 
+"=gruvbox_material
+if has('termguicolors')
+	set termguicolors
+endif
+set background=dark
+let g:gruvbox_material_background = 'medium'
+let g:gruvbox_material_better_performance = 1
+let g:gruvbox_material_transparent_background=1
+let g:gruvbox_material_diagnostic_line_highlight=1
+let g:gruvbox_material_disable_terminal_colors=1
+let g:airline_theme = 'gruvbox_material'
+"let g:lightline = {'colorscheme' : 'gruvbox_mater}
+colorscheme gruvbox-material
 
 
 
